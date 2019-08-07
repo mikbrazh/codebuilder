@@ -1,0 +1,63 @@
+@import "vars"
+@import "fonts"
+@import "libs"
+@import "_mixins/emizer"
+
+::placeholder
+  color: #c0c0c0
+
+::selection
+  color: #ffffff
+  background-color: $accent-yellow
+
+body
+  position: relative
+  overflow-x: hidden
+  min-width: 320px
+  color: $text-color
+  font-family: $text-font
+  font-size: $browser-context
+  line-height: 1.65
+  input, textarea
+    margin: 0
+    padding: 0
+    outline: none
+
+.img-responsive
+  display: block
+  max-width: 100%
+  height: auto
+  &.img-width
+    width: 100%
+
+b, strong
+  font-weight: bold
+
+a:hover
+    text-decoration: none
+
+ul
+  margin: 0
+  padding: 0
+  list-style: none
+
+h1, h2, h3, h4, h5, h6
+  margin: 0
+  padding: 0
+  font-family: $title-font
+
+h2
+  font-size: em(36px)
+
+p
+  margin: 0
+  padding: 0
+
+.example-img
+  width: 100%
+
+.lazy-container // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
+  background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
+
+
+  @import "media" // Медиа запросы. Всегда в конце.
