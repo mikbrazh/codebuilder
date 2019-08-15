@@ -100,8 +100,19 @@ gulp.task('killimg', function() {
 
 // Копирование корневых изображений в корень директории distFolder/img, кроме исключений. Для обновления изображений.
 gulp.task('copyimg', function() {
-  return gulp.src([''+srcFolder+'/img/**/*', '!'+srcFolder+'/img/_*', '!'+srcFolder+'/img/Thumbs.db', '!'+srcFolder+'/img/*.DS_Store'])
+  return gulp.src([''+srcFolder+'/img/**/*', '!'+srcFolder+'/img/{_*,_*/**}', '!'+srcFolder+'/img/Thumbs.db', '!'+srcFolder+'/img/*.DS_Store'])
     .pipe(gulp.dest(''+distFolder+'/img'));
+});
+
+// Удаление всех файлов в корне сайта, кроме исключений.
+gulp.task('killroot', function() {
+  return del.sync([''+distFolder+'/*.*', '!'+distFolder+'/index.html', '!'+distFolder+'/Thumbs.db', '!'+distFolder+'/*.DS_Store']);
+});
+
+// Копирование всех файлов в корне сайта, кроме исключений.
+gulp.task('copyroot', function() {
+  return gulp.src([''+srcFolder+'/*.*', '!'+srcFolder+'/index.html', '!'+srcFolder+'/Thumbs.db', '!'+srcFolder+'/*.DS_Store'])
+    .pipe(gulp.dest(distFolder));
 });
 
 // Копирование содержимого директории distFolder в директорию локального сервера, кроме исключений. Для тестирования на локальном сервере.
@@ -192,10 +203,10 @@ if (gulpVersion == 3) {
   var taskArr = [];
 
   if (useGM == true) {
-    taskArr = ['killfavicons', 'killfonts', 'killimg', 'copyfavicons', 'copyfonts', 'copyimg', 'buildimg', 'buildhtml', 'buildstyles', 'buildscripts', 'browser-sync'];
+    taskArr = ['killroot', 'killfavicons', 'killfonts', 'killimg', 'copyroot', 'copyfavicons', 'copyfonts', 'copyimg', 'buildimg', 'buildhtml', 'buildstyles', 'buildscripts', 'browser-sync'];
   }
   else if (useGM == false) {
-    taskArr = ['killfavicons', 'killfonts', 'killimg', 'copyfavicons', 'copyfonts', 'copyimg', 'copyimgx', 'buildhtml', 'buildstyles', 'buildscripts', 'browser-sync'];
+    taskArr = ['killroot', 'killfavicons', 'killfonts', 'killimg', 'copyroot', 'copyfavicons', 'copyfonts', 'copyimg', 'copyimgx', 'buildhtml', 'buildstyles', 'buildscripts', 'browser-sync'];
 
   }
 
@@ -234,6 +245,6 @@ if (gulpVersion == 4) {
   });
 
   // Таск по умолчанию для Gulp 4.
-  useGM ? gulp.task('default', gulp.parallel('killfavicons', 'killfonts', 'killimg', 'copyfavicons', 'copyfonts', 'copyimg', 'buildimg', 'buildhtml', 'buildstyles', 'buildscripts', 'browser-sync', 'watch'))
-        : gulp.task('default', gulp.parallel('killfavicons', 'killfonts', 'killimg', 'copyfavicons', 'copyfonts', 'copyimg', 'copyimgx', 'buildhtml', 'buildstyles', 'buildscripts', 'browser-sync', 'watch'));
+  useGM ? gulp.task('default', gulp.parallel('killroot', 'killfavicons', 'killfonts', 'killimg', 'copyroot', 'copyfavicons', 'copyfonts', 'copyimg', 'buildimg', 'buildhtml', 'buildstyles', 'buildscripts', 'browser-sync', 'watch'))
+        : gulp.task('default', gulp.parallel('killroot', 'killfavicons', 'killfonts', 'killimg', 'copyroot', 'copyfavicons', 'copyfonts', 'copyimg', 'copyimgx', 'buildhtml', 'buildstyles', 'buildscripts', 'browser-sync', 'watch'));
 };
