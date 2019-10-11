@@ -117,7 +117,7 @@ gulp.task('copyroot', function() {
 
 // Копирование содержимого директории distFolder в директорию локального сервера, кроме исключений. Для тестирования на локальном сервере.
 gulp.task('copytolocalhost', function() {
-  return gulp.src([' '+distFolder+' /**/*', '!'+distFolder+'/**/*/Thumbs.db', '!'+distFolder+'/**/*/*.DS_Store'])
+  return gulp.src([''+distFolder+'/**/*', '!'+distFolder+'/**/*/Thumbs.db', '!'+distFolder+'/**/*/*.DS_Store'])
     .pipe( gulp.dest(localHostFolder) );
 });
 
