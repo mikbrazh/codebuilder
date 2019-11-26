@@ -1,40 +1,36 @@
 @import "vars"
 @import "fonts"
 @import "libs"
+// @import "animation"
+// @import "_mixins/remizer"
 @import "_mixins/emizer"
 
+// БАЗОВЫЙ SASS ->
 ::placeholder
   color: #c0c0c0
 
 ::selection
   color: #ffffff
-  background-color: $accent-yellow
+  background-color: $accent
 
 body
   position: relative
   overflow-x: hidden
   min-width: 320px
   color: $text-color
-  font-family: $text-font
-  font-size: $browser-context
-  line-height: 1.65
+  font-family: $text
+  font-size: 16px
+  line-height: 1.65 
   input, textarea
     margin: 0
     padding: 0
     outline: none
 
-.img-responsive
-  display: block
-  max-width: 100%
-  height: auto
-  &.img-width
-    width: 100%
-
 b, strong
   font-weight: bold
 
 a:hover
-    text-decoration: none
+  text-decoration: none
 
 ul
   margin: 0
@@ -44,7 +40,7 @@ ul
 h1, h2, h3, h4, h5, h6
   margin: 0
   padding: 0
-  font-family: $title-font
+  font-family: $title
 
 h2
   font-size: em(36px)
@@ -53,11 +49,45 @@ p
   margin: 0
   padding: 0
 
-.example-img
-  width: 100%
+.img-responsive
+  display: block
+  max-width: 100%
+  height: auto
+  &.img-width
+    width: 100%
+
+button
+  border: none
+  margin: 0
+  padding: 0
+  width: auto
+  overflow: visible
+  background: transparent
+  /* inherit font & color from ancestor */
+  color: inherit
+  font: inherit
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit
+  -moz-osx-font-smoothing: inherit
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none
+  /* Remove excess padding and border in Firefox 4+ */
+  &::-moz-focus-inner
+    border: 0
+    padding: 0
 
 .lazy-container // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
   background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
+// <- БАЗОВЫЙ SASS
 
+// CUSTOM SASS ->
+@import "_parts/_main"
+// @import "_parts/_section-1"
+// @import "_parts/_section-2" // Закомментируйте для верстки по секциям
+// @import "_parts/_section-3" // Закомментируйте для верстки по секциям
+// @import "_parts/_footer"
 
-  @import "media" // Медиа запросы. Всегда в конце.
+// <- CUSTOM SASS
+@import "media" // Медиа запросы. Всегда в конце
