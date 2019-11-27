@@ -71,7 +71,7 @@ gulp.task('killfav', async () => {
 // Копирование шрифтов
 gulp.task('buildfonts', function() {
   return gulp.src(''+srcFolder+'/fonts/**/*')
-    .pipe(gulp.dest(''+distFolder+'/fonts'));
+    .pipe( gulp.dest(''+distFolder+'/fonts') );
 });
 // Удаление шрифтов
 gulp.task('killfonts', async () => {
@@ -79,12 +79,12 @@ gulp.task('killfonts', async () => {
   console.log('Deleted files and directories:\n', deletedPaths.join('\n'));
 });
 // Копирование на локальный сервер
-gulp.task('buildlh', function() {
+gulp.task('buildlocalhost', function() {
   return gulp.src([''+distFolder+'/**/*', '!'+distFolder+'/**/*/Thumbs.db', '!'+distFolder+'/**/*/*.DS_Store'])
     .pipe( gulp.dest(localHostFolder) );
 });
 // Удаление с локального сервера
-gulp.task('killlh', async () => {
+gulp.task('killlocalhost', async () => {
   const deletedPaths = await del(localHostFolder, {force: true});
   console.log('Deleted files and directories:\n', deletedPaths.join('\n'));
 });
@@ -110,11 +110,11 @@ gulp.task('buildimg', gulp.parallel('buildimg1x', 'buildimg2x'));
 
 // Удаление изображений
 gulp.task('killimg1x', async () => {
-  const deletedPaths = await del(''+distFolder+'/img/@1x/**/*');
+  const deletedPaths = await del(''+distFolder+'/img');
   console.log('Deleted files and directories:\n', deletedPaths.join('\n'));
 });
 gulp.task('killimg2x', async () => {
-  const deletedPaths = await del(''+distFolder+'/img/@2x/**/*');
+  const deletedPaths = await del(''+distFolder+'/img');
   console.log('Deleted files and directories:\n', deletedPaths.join('\n'));
 });
 gulp.task('killimg', gulp.parallel('killimg1x', 'killimg2x'));
